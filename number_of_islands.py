@@ -7,38 +7,33 @@ class Solution:
       return 0
 
     m, n = len(grid), len(grid[0])
-    verified = [[False] * n for x in range(m)]
     count = 0
 
-    for i in range(m):
-      for j in range(n):
-        if grid[i][j] == "1" and not verified[i][j]:
-          self.traverse(grid, verified, m, n, i, j)
+    for i in xrange(m):
+      for j in xrange(n):
+        if grid[i][j] == "1":
+          self.traverse(grid, m, n, i, j)
           count += 1
     return count
 
-  def traverse(self, grid, verified, m, n, i, j):
+  def traverse(self, grid, m, n, i, j):
 
     if grid[i][j] == '0':
-      verified[i][j] = True
       return
 
-    if verified[i][j]:
-      return
-
-    verified[i][j] = True
+    grid[i][j] = '0'
 
     if i != 0:
-      self.traverse(grid, verified, m, n, i - 1, j)
+      self.traverse(grid, m, n, i - 1, j)
 
     if j != 0:
-      self.traverse(grid, verified, m, n, i, j - 1)
+      self.traverse(grid, m, n, i, j - 1)
 
     if i + 1 < m:
-      self.traverse(grid, verified, m, n, i + 1, j)
+      self.traverse(grid, m, n, i + 1, j)
 
     if j + 1 < n:
-      self.traverse(grid, verified, m, n, i, j + 1)
+      self.traverse(grid, m, n, i, j + 1)
 
 def main():
 
